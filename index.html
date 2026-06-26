@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bung ảnh vui vẻ</title>
+    <meta
+      name="description"
+      content="Một trang bấm vào là bung ảnh, hiệu ứng vui vui để trêu bạn bè."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="stage">
+      <input class="toggle" type="checkbox" id="open-photo" />
+
+      <section class="intro" aria-labelledby="page-title">
+        <p class="badge">Chế độ: đi ké nhưng rất tự tin</p>
+        <h1 id="page-title">Bấm cái là lộ ảnh huyền thoại</h1>
+        <p class="lead">
+          Không cần tăng ga, chỉ cần nhấp nhẹ. Ảnh sẽ xuất hiện với phong thái
+          như vừa xin quá giang thành công.
+        </p>
+
+        <label class="launch" for="open-photo">
+          <span class="launch-icon" aria-hidden="true">🏍️</span>
+          <span class="launch-text">Nhấp để bung ảnh</span>
+        </label>
+      </section>
+
+      <section class="photo-zone" aria-label="Ảnh vui sau khi nhấp">
+        <div class="speed-lines" aria-hidden="true"></div>
+        <figure class="photo-pop">
+          <div
+            class="photo-frame"
+            role="img"
+            aria-label="Hai người mặc áo trắng ngồi trên xe máy trong khoảnh khắc hài hước"
+          ></div>
+          <figcaption>
+            <strong>Khoảnh khắc quá giang cấp tốc</strong>
+            <span>Người lái: bình tĩnh. Người sau: nhập vai hơi sâu.</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <div class="confetti confetti-a" aria-hidden="true"></div>
+      <div class="confetti confetti-b" aria-hidden="true"></div>
+      <div class="confetti confetti-c" aria-hidden="true"></div>
+      <div class="confetti confetti-d" aria-hidden="true"></div>
+    </main>
+  </body>
+</html>

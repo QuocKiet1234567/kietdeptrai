@@ -1,0 +1,417 @@
+:root {
+  color-scheme: light;
+  --ink: #1d2433;
+  --paper: #fffdf7;
+  --red: #f24f3d;
+  --yellow: #ffd84d;
+  --blue: #2f80ed;
+  --green: #22a06b;
+  --pink: #ff79b0;
+  --shadow: rgba(18, 23, 34, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  color: var(--ink);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background:
+    linear-gradient(90deg, rgba(47, 128, 237, 0.08) 1px, transparent 1px),
+    linear-gradient(rgba(47, 128, 237, 0.08) 1px, transparent 1px),
+    linear-gradient(135deg, #f7fbff 0%, #fff8df 42%, #ffe6ee 100%);
+  background-size: 26px 26px, 26px 26px, 100% 100%;
+  overflow-x: hidden;
+}
+
+.stage {
+  position: relative;
+  width: min(1040px, 100%);
+  min-height: min(760px, calc(100vh - 44px));
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.1fr);
+  align-items: center;
+  gap: clamp(18px, 4vw, 54px);
+  padding: clamp(20px, 4vw, 46px);
+  border: 3px solid #161b26;
+  border-radius: 8px;
+  background:
+    linear-gradient(118deg, rgba(255, 216, 77, 0.42) 0 14%, transparent 14% 100%),
+    linear-gradient(288deg, rgba(255, 121, 176, 0.32) 0 12%, transparent 12% 100%),
+    linear-gradient(150deg, rgba(255, 255, 255, 0.93), rgba(255, 253, 247, 0.86));
+  box-shadow: 14px 14px 0 #161b26, 0 24px 60px var(--shadow);
+  overflow: hidden;
+}
+
+.stage::before,
+.stage::after {
+  content: "";
+  position: absolute;
+  inset: auto auto 22px 22px;
+  width: 118px;
+  height: 18px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--red) 0 16px,
+    var(--yellow) 16px 32px,
+    var(--green) 32px 48px,
+    var(--blue) 48px 64px
+  );
+  transform: rotate(-4deg);
+}
+
+.stage::after {
+  inset: 22px 22px auto auto;
+  width: 94px;
+  transform: rotate(5deg);
+}
+
+.toggle {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro {
+  position: relative;
+  z-index: 2;
+}
+
+.badge {
+  display: inline-flex;
+  margin: 0 0 16px;
+  padding: 9px 12px;
+  border: 2px solid #161b26;
+  border-radius: 8px;
+  background: var(--yellow);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  box-shadow: 5px 5px 0 #161b26;
+  transform: rotate(-1.5deg);
+}
+
+h1 {
+  max-width: 620px;
+  margin: 0;
+  font-size: clamp(2.3rem, 6vw, 5.4rem);
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+.lead {
+  max-width: 530px;
+  margin: 18px 0 24px;
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  line-height: 1.65;
+}
+
+.launch {
+  width: min(100%, 320px);
+  min-height: 58px;
+  display: inline-grid;
+  grid-template-columns: 42px 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px 8px 10px;
+  border: 3px solid #161b26;
+  border-radius: 8px;
+  background: var(--red);
+  color: #fff;
+  box-shadow: 7px 7px 0 #161b26;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.launch:hover {
+  transform: translate(-2px, -2px) rotate(-1deg);
+  box-shadow: 10px 10px 0 #161b26;
+  background: #e74332;
+}
+
+.launch:active {
+  transform: translate(4px, 4px);
+  box-shadow: 3px 3px 0 #161b26;
+}
+
+.launch-icon {
+  display: grid;
+  place-items: center;
+  inline-size: 42px;
+  block-size: 42px;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 1.45rem;
+}
+
+.launch-text {
+  min-width: 0;
+  font-weight: 900;
+  font-size: 1.02rem;
+  text-align: left;
+}
+
+.photo-zone {
+  position: relative;
+  z-index: 1;
+  min-height: 560px;
+  display: grid;
+  place-items: center;
+  perspective: 1000px;
+}
+
+.speed-lines {
+  position: absolute;
+  inset: 11% -6% 10% 9%;
+  background:
+    linear-gradient(105deg, transparent 0 44%, rgba(242, 79, 61, 0.9) 45% 47%, transparent 48%),
+    linear-gradient(105deg, transparent 0 52%, rgba(47, 128, 237, 0.85) 53% 55%, transparent 56%),
+    linear-gradient(105deg, transparent 0 62%, rgba(34, 160, 107, 0.82) 63% 65%, transparent 66%);
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 320ms ease, transform 520ms ease;
+}
+
+.photo-pop {
+  width: min(100%, 430px);
+  margin: 0;
+  padding: 12px 12px 16px;
+  border: 3px solid #161b26;
+  border-radius: 8px;
+  background: var(--paper);
+  box-shadow: 12px 12px 0 #161b26;
+  opacity: 0;
+  transform: translateY(38px) rotate(-8deg) scale(0.78);
+  transform-origin: 50% 80%;
+  transition:
+    opacity 260ms ease,
+    transform 620ms cubic-bezier(0.16, 1.25, 0.32, 1),
+    box-shadow 220ms ease;
+}
+
+.photo-frame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border: 2px solid #161b26;
+  border-radius: 6px;
+  background:
+    url("images/motorbike.jpg") center / cover no-repeat,
+    url("images/friday.svg") center / 44% no-repeat,
+    linear-gradient(135deg, rgba(255, 216, 77, 0.5), rgba(47, 128, 237, 0.22));
+}
+
+.photo-pop figcaption {
+  display: grid;
+  gap: 4px;
+  margin-top: 12px;
+  text-align: center;
+}
+
+.photo-pop strong {
+  font-size: 1.08rem;
+}
+
+.photo-pop span {
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.toggle:checked ~ .intro .launch {
+  background: var(--green);
+  transform: rotate(1deg);
+}
+
+.toggle:checked ~ .intro .launch-text::before {
+  content: "Ảnh đã bung rồi";
+}
+
+.toggle:checked ~ .intro .launch-text {
+  font-size: 0;
+}
+
+.toggle:checked ~ .intro .launch-text::before {
+  font-size: 1.02rem;
+}
+
+.toggle:checked ~ .photo-zone .speed-lines {
+  opacity: 1;
+  transform: translateX(0);
+  animation: roadRush 900ms linear infinite;
+}
+
+.toggle:checked ~ .photo-zone .photo-pop {
+  opacity: 1;
+  transform: translateY(0) rotate(2deg) scale(1);
+  animation: happyShake 2800ms ease-in-out 700ms infinite;
+}
+
+.confetti {
+  position: absolute;
+  z-index: 0;
+  width: 22px;
+  height: 22px;
+  border: 3px solid #161b26;
+  opacity: 0;
+  transform: scale(0);
+}
+
+.confetti-a {
+  top: 17%;
+  left: 50%;
+  background: var(--pink);
+}
+
+.confetti-b {
+  top: 66%;
+  left: 44%;
+  background: var(--yellow);
+  border-radius: 50%;
+}
+
+.confetti-c {
+  right: 7%;
+  bottom: 18%;
+  background: var(--blue);
+  transform: rotate(45deg) scale(0);
+}
+
+.confetti-d {
+  top: 12%;
+  right: 35%;
+  background: var(--green);
+}
+
+.toggle:checked ~ .confetti {
+  opacity: 1;
+  animation: confettiPop 1400ms ease-out both;
+}
+
+.toggle:checked ~ .confetti-b {
+  animation-delay: 90ms;
+}
+
+.toggle:checked ~ .confetti-c {
+  animation-delay: 160ms;
+}
+
+.toggle:checked ~ .confetti-d {
+  animation-delay: 230ms;
+}
+
+@keyframes happyShake {
+  0%,
+  100% {
+    transform: translateY(0) rotate(2deg) scale(1);
+  }
+  46% {
+    transform: translateY(-5px) rotate(-1deg) scale(1.01);
+  }
+  52% {
+    transform: translateY(-5px) rotate(2.5deg) scale(1.01);
+  }
+  58% {
+    transform: translateY(-3px) rotate(0.5deg) scale(1);
+  }
+}
+
+@keyframes roadRush {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 90px 0;
+  }
+}
+
+@keyframes confettiPop {
+  0% {
+    transform: translateY(18px) rotate(0deg) scale(0);
+  }
+  55% {
+    transform: translateY(-18px) rotate(180deg) scale(1);
+  }
+  100% {
+    transform: translateY(0) rotate(320deg) scale(1);
+  }
+}
+
+@media (max-width: 820px) {
+  body {
+    padding: 14px;
+  }
+
+  .stage {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    padding: 22px;
+    box-shadow: 8px 8px 0 #161b26, 0 18px 42px var(--shadow);
+  }
+
+  .photo-zone {
+    min-height: 430px;
+  }
+
+  .photo-pop {
+    width: min(100%, 360px);
+  }
+
+  .stage::before {
+    bottom: 10px;
+    left: 12px;
+  }
+
+  .stage::after {
+    top: 12px;
+    right: 12px;
+  }
+}
+
+@media (max-width: 460px) {
+  .stage {
+    padding: 18px;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+  }
+
+  .badge {
+    max-width: 100%;
+    font-size: 0.72rem;
+  }
+
+  .launch {
+    width: 100%;
+  }
+
+  .photo-zone {
+    min-height: 380px;
+  }
+
+  .photo-pop {
+    padding: 8px 8px 12px;
+    box-shadow: 7px 7px 0 #161b26;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
